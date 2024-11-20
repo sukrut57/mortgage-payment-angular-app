@@ -1,0 +1,221 @@
+.mortgage-container {
+  --primary-background-color: hsl(0, 0%, 100%);
+
+  --color-100: hsl(202, 86%, 94%);
+  --color-300: hsl(203, 41%, 72%);
+  --color-500: hsl(200, 26%, 54%);
+  --color-700: hsl(200, 24%, 40%);
+  --color-900: hsl(202, 55%, 16%);
+
+  --color-red: hsl(4, 69%, 50%);
+  --color-lime: hsl(61, 70%, 52%);
+
+  //background-color: var(--primary-background-color);
+
+  .left-content,
+  .right-content {
+    padding: 0;
+  }
+
+  .left-content {
+    color: var(--color-900);
+    //background-color: var(--primary-background-color);
+
+    mat-card {
+      min-width: 375px;
+      max-width: 520px;
+      min-height: 500px;
+      background-color: var(--primary-background-color);
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+
+
+      mat-card-header {
+        mat-card-title {
+          font-size: 1.3rem !important;
+        }
+
+        mat-card-subtitle {
+          font-size: 0.9rem !important;
+
+          a {
+            color: var(--color-500);
+          }
+        }
+      }
+
+      mat-card-content {
+        .first-input {
+          .container {
+            padding: 0;
+            margin-top: -1rem;
+            height: 2.9rem;
+
+            .currency {
+              background-color: var(--color-100);
+              color: var(--color-700);
+              height: 100%;
+              display: flex;
+              align-items: center;
+              padding: 0 12px;
+            }
+          }
+
+        }
+      }
+
+      .calculate-button {
+        min-width: 250px;
+        background-color: var(--color-lime);
+        color: var(--color-900);
+        height: 40px;
+      }
+    }
+
+  }
+
+  .right-content {
+    //background-color: var(--secondary-background-color);
+
+    mat-card {
+      min-width: 375px;
+      max-width: 520px;
+      min-height: 500px;
+      background-color: var(--color-900);
+      color: white;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 70px;
+
+      mat-card-header {
+
+        mat-card-title {
+          font-size: 1.3rem !important;
+        }
+
+      }
+
+      mat-card-content {
+        color: var(--color-300);
+
+        .output {
+          background-color: hsl(203, 54%, 14%);
+          border-top: 3px solid var(--color-lime);
+          border-radius: 7px;
+          min-height: 250px;
+
+          .payment {
+            font-size: 3rem;
+            font-weight: bolder;
+            letter-spacing: 1px;
+            color: var(--color-lime);
+          }
+
+          .spacer {
+            border: 1px solid var(--color-900);
+          }
+
+          .total-payment {
+            color: var(--color-100);
+            font-weight: bold;
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+          }
+        }
+
+      }
+
+      .empty-illustration {
+        img {
+          width: 200px;
+          margin: 0 auto;
+          object-fit: contain;
+        }
+      }
+    }
+
+
+  }
+}
+
+
+
+@media screen and (max-width: 991px) {
+  mat-card {
+    border-radius: 0 !important;
+  }
+  .btn-position{
+    text-align: center;
+  }
+}
+
+@media screen and (min-width: 767px) and (max-width: 991px) {
+  .mortgage-container {
+    width: 500px;
+  }
+
+}
+
+@media screen and (min-width: 992px) {
+  .left-content {
+
+    mat-card-header,
+    mat-card-content {
+      padding-right: 60px;
+    }
+  }
+
+  .right-content {
+    mat-card {
+      margin-left: -60px;
+    }
+  }
+
+}
+
+
+:host ::ng-deep .mat-mdc-text-field-wrapper {
+  border: 1px solid var(--color-300) !important;
+  border-radius: 5px !important;
+  height: 3rem !important;
+  background-color: var(--primary-background-color) !important;
+}
+
+:host ::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-line-ripple::before {
+  border-bottom: none !important;
+}
+
+:host ::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-line-ripple::after {
+  border-bottom: none !important;
+}
+
+:host ::ng-deep .mat-mdc-text-field-wrapper {
+  padding: 0 !important;
+}
+
+:host ::ng-deep .mdc-radio__background .mdc-radio__outer-circle {
+  border: 1px solid var(--color-lime) !important;
+}
+
+:host ::ng-deep .mdc-radio__background .mdc-radio__inner-circle {
+  border: 1px solid var(--color-lime) !important;
+  background-color: var(--color-lime) !important;
+}
+
+
+:host ::ng-deep .mdc-label {
+  color: var(--color-900);
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+:host ::ng-deep .mat-mdc-radio-button {
+  border: 1px solid var(--color-300) !important;
+  background-color: var(--primary-background-color) !important;
+  border-radius: 10px !important;
+
+}
+
+:host ::ng-deep .mat-mdc-radio-checked {
+  border: 1px solid var(--color-lime) !important;
+  background-color: hsl(63, 82%, 85%) !important;
+}
