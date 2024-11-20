@@ -5,9 +5,9 @@
 
         <mat-card appearance="raised" class="p-3">
           <mat-card-header class="title pb-4">
-            <div class="d-inline-flex justify-content-between align-items-center w-100">
+            <div class="d-inline-flex flex-column flex-md-row align-items-start justify-content-between align-items-md-center w-100">
               <mat-card-title class="fw-medium">Mortgage Calculator</mat-card-title>
-              <mat-card-subtitle><a routerLink="/">Clear All</a></mat-card-subtitle>
+              <mat-card-subtitle><a routerLink="/" (click)="clearForm()">Clear All</a></mat-card-subtitle>
             </div>
           </mat-card-header>
           <mat-card-content>
@@ -20,7 +20,7 @@
                 <div class="my-2"></div>
                 <mat-form-field class="w-100 first-input">
                   <div class="d-flex align-items-center justify-content-between gap-3 container">
-                    <span class="currency">&#8364;</span>
+                    <span class="currency fw-medium">&pound;</span>
                     <input class="fw-medium" matInput formControlName="mortgageAmount">
                   </div>
                 </mat-form-field>
@@ -32,7 +32,7 @@
                     <mat-form-field class="w-100 first-input">
                       <div class="d-flex align-items-center justify-content-between gap-3 container">
                         <input class="fw-medium ps-2" matInput formControlName="mortgageTerm">
-                        <span class="currency">years</span>
+                        <span class="currency  fw-medium">years</span>
                       </div>
                     </mat-form-field>
                   </div>
@@ -43,7 +43,7 @@
                     <mat-form-field class="w-100 first-input">
                       <div class="d-flex align-items-center justify-content-between gap-3 container">
                         <input class="fw-medium ps-2" matInput formControlName="interestRate">
-                        <span class="currency">&percnt;</span>
+                        <span class="currency  fw-medium">&percnt;</span>
                       </div>
                     </mat-form-field>
                   </div>
@@ -79,7 +79,7 @@
 
         <mat-card appearance="raised" class="p-3">
 
-          @if(!valid){
+          @if(valid){
 
           <ng-container>
             <mat-card-header class="title mb-3">
@@ -94,13 +94,20 @@
                 To adjust the results, edit the form and click “calculate repayments” again.
               </div>
               <div class="output p-4 mt-5">
-                <p>
-                  Your monthly repayments
-                </p>
-                <p class="payment pt-3">$1,750.74</p>
-                <div class="spacer"></div>
-                <p class="pt-3"> Total you'll repay over the term</p>
-                <p class="pt-3 total-payment">$539,322.94</p>
+                @if(mortgageForm.get('mortgageType')?.value === 'Repayment') {
+                  <p>
+                    Your monthly repayments
+                  </p>
+                  <p class="payment pt-3">{{monthlyPayment | currency:'GBP'}}</p>
+                  <div class="spacer"></div>
+                  <p class="pt-3"> Total you'll repay over the term</p>
+                  <p class="pt-3 total-payment">{{totalPayment | currency:'GBP'}}</p>
+                }
+                @else {
+                  <p class="pt-3"> Total interest you will pay over the term</p>
+                  <p class="pt-3 total-payment">{{totalPayment | currency:'GBP'}}</p>
+                }
+                
               </div>
             </mat-card-content>
           </ng-container>
