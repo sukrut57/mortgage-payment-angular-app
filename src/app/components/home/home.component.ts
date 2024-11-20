@@ -2,7 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {MatCard, MatCardContent, MatCardHeader, MatCardSubtitle, MatCardTitle} from '@angular/material/card';
 import {RouterLink} from '@angular/router';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
-import {MortgageType} from './mortgageType';
+import { MatFormFieldModule } from '@angular/material/form-field';
+
+import { MatInputModule } from '@angular/material/input';
 import {MatFormField, MatLabel} from '@angular/material/form-field';
 import {MatInput} from '@angular/material/input';
 import {MatRadioButton, MatRadioGroup} from '@angular/material/radio';
@@ -27,7 +29,9 @@ import { CurrencyPipe } from '@angular/common';
     MatRadioGroup,
     MatRadioButton,
     MatButtonModule,
-    CurrencyPipe 
+    CurrencyPipe,
+    MatInputModule,
+    MatFormFieldModule
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
@@ -41,26 +45,26 @@ export class HomeComponent implements OnInit {
   constructor(private _formBuilder: FormBuilder) {
     this.mortgageForm = this._formBuilder.group({
       'mortgageAmount': ['',
-        [
-          Validators.required,
-          Validators.min(10000),
-          Validators.pattern('^[0-9]*$')]
+      [
+        Validators.required,
+        Validators.min(10000),
+        Validators.pattern('^[0-9]*$')]
       ],
       'mortgageTerm': ['',
-        [
-          Validators.required,
-          Validators.min(5),
-          Validators.max(30),
-          Validators.pattern('^[0-9]*$')]
+      [
+        Validators.required,
+        Validators.min(5),
+        Validators.max(30),
+        Validators.pattern('^[0-9]*$')]
       ],
       'interestRate': ['',
-        [
-          Validators.required,
-          Validators.min(1),
-          Validators.max(10),
-          Validators.pattern('^[0-9]*$')]
+      [
+        Validators.required,
+        Validators.min(1),
+        Validators.max(10),
+        Validators.pattern('^[0-9]+(\.[0-9]{1,2})?$')]
       ],
-      'mortgageType': [MortgageType.Repayment, Validators.required],
+      'mortgageType': ['', Validators.required],
     });
   }
 
@@ -77,8 +81,9 @@ export class HomeComponent implements OnInit {
         this.mortgageTerm !== undefined
       )
       {
+        //reset data
         this.valid = true;
-  
+    
         console.log(this.mortgageAmount?.value);
         console.log(this.interestRate?.value);
         console.log(this.mortgageTerm?.value);
@@ -119,7 +124,7 @@ export class HomeComponent implements OnInit {
   }
 
   calculateTotalRepayments(){
-
+   
     const principal = this.mortgageAmount?.value;
 
     const annualInterestRate = this.interestRate?.value / 100;
@@ -156,8 +161,7 @@ export class HomeComponent implements OnInit {
   clearForm(){
     this.mortgageForm.reset();
     this.valid = false;
-    this.monthlyPayment = 0;
     this.totalPayment = 0;
-
+    this.monthlyPayment = 0;
   }
 }

@@ -51,6 +51,15 @@
             margin-top: -1rem;
             height: 2.9rem;
 
+            .currency-error{
+              background-color: var(--color-red);
+              color: var(--primary-background-color);
+              height: 100%;
+              display: flex;
+              align-items: center;
+              padding: 0 12px;
+            }
+
             .currency {
               background-color: var(--color-100);
               color: var(--color-700);
@@ -210,6 +219,13 @@
 
 :host ::ng-deep .mat-mdc-radio-button {
   border: 1px solid var(--color-300) !important;
+  background-color: var(--primary-background-color) !important;
+  border-radius: 10px !important;
+
+}
+
+:host ::ng-deep .mat-mdc-radio-button:hover {
+  border: 1px solid var(--color-lime) !important;
   background-color: var(--primary-background-color) !important;
   border-radius: 10px !important;
 

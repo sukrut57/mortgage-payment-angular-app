@@ -20,9 +20,17 @@
                 <div class="my-2"></div>
                 <mat-form-field class="w-100 first-input">
                   <div class="d-flex align-items-center justify-content-between gap-3 container">
-                    <span class="currency fw-medium">&pound;</span>
+                    @if(mortgageForm.get('mortgageAmount')?.touched && mortgageForm.get('mortgageAmount')?.invalid){
+                      <span class="currency-error fw-medium">&pound;</span>
+                    }
+                    @else {
+                      <span class="currency fw-medium">&pound;</span>
+                    }
                     <input class="fw-medium" matInput formControlName="mortgageAmount">
                   </div>
+                  @if(mortgageAmount?.invalid || mortgageAmount?.touched || mortgageAmount?.dirty) {
+                    <mat-error>This field is required</mat-error>
+                  }
                 </mat-form-field>
 
                 <div class="d-flex gap-md-3 flex-column flex-md-row">
@@ -32,8 +40,16 @@
                     <mat-form-field class="w-100 first-input">
                       <div class="d-flex align-items-center justify-content-between gap-3 container">
                         <input class="fw-medium ps-2" matInput formControlName="mortgageTerm">
-                        <span class="currency  fw-medium">years</span>
+                        @if(mortgageForm.get('mortgageTerm')?.touched && mortgageForm.get('mortgageTerm')?.invalid){
+                          <span class="currency-error fw-medium">years</span>
+                        }
+                        @else {
+                          <span class="currency fw-medium">years</span>
+                        }
                       </div>
+                      @if(mortgageTerm?.invalid || mortgageTerm?.touched || mortgageTerm?.dirty) {
+                        <mat-error>This field is required</mat-error>
+                      }
                     </mat-form-field>
                   </div>
 
@@ -43,8 +59,16 @@
                     <mat-form-field class="w-100 first-input">
                       <div class="d-flex align-items-center justify-content-between gap-3 container">
                         <input class="fw-medium ps-2" matInput formControlName="interestRate">
-                        <span class="currency  fw-medium">&percnt;</span>
+                        @if(mortgageForm.get('interestRate')?.touched && mortgageForm.get('interestRate')?.invalid){
+                          <span class="currency-error fw-medium">&percnt;</span>
+                        }
+                        @else {
+                          <span class="currency fw-medium">&percnt;</span>
+                        }
                       </div>
+                      @if(interestRate?.invalid || interestRate?.touched || interestRate?.dirty) {
+                        <mat-error>This field is required</mat-error>
+                      }
                     </mat-form-field>
                   </div>
                 </div>
@@ -57,6 +81,11 @@
                     <div class="my-1"></div>
                     <mat-radio-button value="InterestOnly">Interest Only</mat-radio-button>
                   </div>
+                  @if((interestRate?.invalid && interestRate?.touched) 
+                        || (mortgageAmount?.invalid && mortgageAmount?.touched) 
+                        || (mortgageTerm?.invalid && mortgageTerm?.touched)) {
+                    <mat-error>This field is required</mat-error>
+                  }
                 </mat-radio-group>
                 <div class="my-3"></div>
                 <div class="btn-position">
